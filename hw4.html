@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>Click the button to wait 3 seconds, then alert "Hello".</p>
+<p>After clicking away the alert box, an new alert box will appear in 3 seconds. This goes on forever...</p>
+<button onclick="myFunction()">Try it</button>
+
+<canvas id="myCanvas"></canvas>
+
+<script>
+  let widthOffest = 0
+let heightOffest = 0
+function myFunction() {
+    setInterval(function(){ 
+      let canvas = document.getElementById("myCanvas")
+        widthOffest+=10;heightOffest+=10;
+        ctx.clearRect(0,0, 500, 500);
+        canvas.height = window.innerHeight+heightOffest;
+        canvas.width = window.innerWidth+widthOffest;
+
+        //畫一個下半圓，指定顏色為白色
+        ctx.beginPath()
+        ctx.lineWidth = 3;
+        ctx.fillStyle = "#FFFFFF"
+        ctx.arc(100+widthOffest,100+heightOffest,50,0,Math.PI)
+        ctx.fill()
+        ctx.stroke()
+
+        //畫一個上半圓，指定顏色為紅色
+        ctx.beginPath()
+        ctx.fillStyle = "#FF0000"
+        ctx.arc(100+widthOffest,100+heightOffest,50,Math.PI,Math.PI*2)
+        ctx.fill()
+        ctx.stroke()
+
+        //畫中間的線和圈圈，指定顏色為白色
+        ctx.beginPath()
+        ctx.fillStyle = "#FFFFFF"
+        //從圓的左邊開始
+        ctx.moveTo(50+widthOffest,100+heightOffest)
+        //連到中間後接著一個上半圓
+        ctx.arc(100+widthOffest,100+heightOffest,10,Math.PI,Math.PI*2)
+        //繞過去後再畫一條直線到圓的右邊
+        ctx.lineTo(150+widthOffest,100)
+        //最後沿著線繞回來畫一個下半圓
+        ctx.arc(100+widthOffest,100+heightOffest,10,0,Math.PI*2)
+        ctx.fill()
+        ctx.stroke()
+
+        //畫一個圓形，中間的那個圈圈按鈕
+        ctx.beginPath()
+        ctx.arc(100+widthOffest,100+heightOffest,5,0,Math.PI*2)
+        ctx.stroke()
+    }, 100);
+}
+
+let canvas = document.getElementById("myCanvas")
+let ctx = canvas.getContext("2d")
+
+
+
+
+</script>
+
+</body>
+</html>
